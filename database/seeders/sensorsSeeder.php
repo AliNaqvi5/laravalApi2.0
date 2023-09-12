@@ -13,11 +13,11 @@ class sensorsSeeder extends Seeder
      */
     public function run(): void
     {
-        sensors::create(["id"=> 1, "name"=> "Rain Sensor"]);
-        sensors::create(["id"=> 2, "name"=> "Soil Moisture Sensor"]);
-        sensors::create(["id"=> 3, "name"=> "Humidity Sensor"]);
-        sensors::create(["id"=> 4, "name"=> "Temperature Sensor"]);
-        sensors::create(["id"=> 5, "name"=> "LUX Sensor"]);
+        sensors::create(["id"=> 1, "name"=> "Temperature Sensor"]);
+        sensors::create(["id"=> 2, "name"=> "Humidity Sensor"]);
+        sensors::create(["id"=> 3, "name"=> "LUX Sensor"]);
+        sensors::create(["id"=> 4, "name"=> "Rain Sensor"]);
+        sensors::create(["id"=> 5, "name"=> "Soil Moisture Sensor"]);
         //
     }
 }

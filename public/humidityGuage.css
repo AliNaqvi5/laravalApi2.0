@@ -1,0 +1,92 @@
+body {
+    /*background-color: #1c2039;*/
+}
+
+.gaugeHum {
+    position: relative;
+    width: 7em;
+    height: 5.8em;
+    margin: 0.5em auto;
+    font-size: 5em;
+    direction: ltr;
+}
+.gauge-innerHum  {
+    position: relative;
+    top: -4.85em;
+    opacity: 0;
+    transition: opacity .5s;
+
+.gaugeHum.load & {
+    opacity: 1;
+}
+
+.barHum  {
+    left: 50%;
+    position: absolute;
+    transform-origin: 0 2.5em;
+    width: .03em;
+    height: .2em;
+    background: rgba(0,0,0,.2);
+&.peakHum  {
+     height: .35em;
+ }
+}
+}
+.gauge-outerHum  {
+    position: relative;
+    height: 100%;
+    margin-top: .3em;
+
+.barHum  {
+    position: absolute;
+    width: .05em;
+    height: 0.7em;
+    left: 50%;
+    transform-origin: 0 3.43em;
+    background-color: rgba(0,0,0,.2);
+    opacity: 0;
+    transition: opacity .5s;
+
+.gaugeHum.load & {
+    opacity: 1;
+}
+}
+}
+.gauge-digitsHum {
+    position: absolute;
+    height: 81%;
+    width: 70%;
+    top: 1.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(0,0,0,.4);
+    opacity: 0;
+    transition: opacity .5s .5s;
+.gaugeHum.load & {
+    opacity: 1;
+}
+&.scaleHum {
+     transform: translateX(-50%) scale(0.8);
+ }
+
+
+
+
+.digitHum {
+    position: absolute;
+    font-size: 0.4em;
+    line-height: 0.2;
+}
+
+.current-digitHum {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: rgba(8,0,0,.9);
+&:afterHum {
+     content: '\00B0';
+ }
+}
+
+}

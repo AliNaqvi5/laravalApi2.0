@@ -1,0 +1,136 @@
+body {
+    /*background-color: #1c2039;*/
+}
+.outer-wrapper{
+    display: inline-block;
+    margin: 5px 15px;
+    padding: 25px 15px;
+    background: #eee;
+    min-width: 50px;
+}
+
+.column-wrapper{
+    height: 200px;
+    width: 20px;
+    background: #CFD8DC;
+    transform: rotate(180deg);
+    margin: 0 auto;
+}
+
+.column{
+//position: relative;
+//display: block;
+//bottom: 0;
+    width: 20px;
+    height: 0%;
+    background: #90A4AE;
+//transfrom: -moz-translateY(-10px);
+}
+
+.percentage, .value{
+    margin-top: 10px;
+    padding: 5px 10px;
+    color: #FFF;
+    background: #263238;
+    position: relative;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.value{
+    background: #7986CB;
+}
+.headingSensorGuage
+{
+    width: auto;
+    text-align: center;
+}
+
+.gaugeTemp {
+    position: relative;
+    width: 7em;
+    height: 5.8em;
+    margin: 0.5em auto;
+    font-size: 5em;
+    direction: ltr;
+}
+.gauge-innerTemp  {
+    position: relative;
+    top: -4.85em;
+    opacity: 0;
+    transition: opacity .5s;
+
+.gaugeTemp.load & {
+    opacity: 1;
+}
+
+.barTemp  {
+    left: 50%;
+    position: absolute;
+    transform-origin: 0 2.5em;
+    width: .03em;
+    height: .2em;
+    background: rgba(0,0,0,.2);
+&.peakTemp  {
+     height: .35em;
+ }
+}
+}
+.gauge-outerTemp  {
+    position: relative;
+    height: 100%;
+    margin-top: .3em;
+
+.barTemp  {
+    position: absolute;
+    width: .05em;
+    height: 0.7em;
+    left: 50%;
+    transform-origin: 0 3.43em;
+    background-color: rgba(0,0,0,.2);
+    opacity: 0;
+    transition: opacity .5s;
+
+.gaugeTemp.load & {
+    opacity: 1;
+}
+}
+}
+.gauge-digitsTemp {
+    position: absolute;
+    height: 81%;
+    width: 70%;
+    top: 1.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(0,0,0,.4);
+    opacity: 0;
+    transition: opacity .5s .5s;
+.gaugeTemp.load & {
+    opacity: 1;
+}
+&.scaleTemp {
+     transform: translateX(-50%) scale(0.8);
+ }
+
+
+
+
+.digitTemp {
+    position: absolute;
+    font-size: 0.4em;
+    line-height: 0.2;
+}
+
+.current-digitTemp {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: rgba(8,0,0,.9);
+&:afterTemp {
+     content: '\00B0';
+ }
+}
+
+}
