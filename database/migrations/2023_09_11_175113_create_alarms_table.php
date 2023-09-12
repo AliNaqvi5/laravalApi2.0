@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('location');
+        Schema::create('alarms', function (Blueprint $table) {
+            $table->id();
             $table->integer('sensor_id')->unsigned();
-            $table->string("value");
-            $table->string("unit");
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data');
+        Schema::dropIfExists('alarms');
     }
 };
