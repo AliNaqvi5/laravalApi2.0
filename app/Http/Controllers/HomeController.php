@@ -24,11 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data["temperature"] = data::where(["sensor_id" => 1])->first();
-        $data["humidity"] = data::where(["sensor_id" => 2])->first();
-        $data["lux"] = data::where(["sensor_id" => 3])->first();
-        $data["soilMoisture"] = data::where(["sensor_id" => 4])->first();
-        $data["rain"] = data::where(["sensor_id" => 5])->first();
+        $data["temperature"] = data::where(["sensor_id" => 1])->orderby("id","desc")->first();
+        $data["humidity"] = data::where(["sensor_id" => 2])->orderby("id","desc")->first();
+        $data["lux"] = data::where(["sensor_id" => 3])->orderby("id","desc")->first();
+        $data["soilMoisture"] = data::where(["sensor_id" => 4])->orderby("id","desc")->first();
+        $data["rain"] = data::where(["sensor_id" => 5])->orderby("id","desc")->first();
         return view('home',$data);
     }
 

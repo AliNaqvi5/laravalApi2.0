@@ -1,6 +1,14 @@
 body {
     /*background-color: #1c2039;*/
 }
+.card {
+    margin-top: 21px;
+}
+.card-header {
+    font-size: 15px;
+    font-weight: 800;
+    text-align: center;
+}
 .outer-wrapper{
     display: inline-block;
     margin: 5px 15px;
@@ -44,6 +52,12 @@ body {
 {
     width: auto;
     text-align: center;
+
+}
+
+.dark
+{
+    color:white;
 }
 
 .gaugeTemp {

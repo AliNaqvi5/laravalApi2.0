@@ -1,7 +1,7 @@
 $(function () {
-    GenerateGuage("Hum",60,257,100,[10,50,90]);
-    GenerateGuage("Temp",43,257,60,[10,30,50]);
-    function GenerateGuage(prefix = "Temp",points,radius,max,peaks) {
+    GenerateGuage("Hum",60,257,100,[10,50,90],"%");
+    GenerateGuage("Temp",43,257,60,[10,30,50],"C");
+    function GenerateGuage(prefix = "Temp",points,radius,max,peaks,unit) {
         // const points = 43;
         // const radius = 257;
         // const max = 60;
@@ -69,16 +69,16 @@ $(function () {
         }
 
         counterify(prefix);
-        setTime(prefix);
+        setTime(prefix,unit);
     }
 
-    function setTime(prefix) {
+    function setTime(prefix,unit) {
         setTimeout(() => {
             const gauge = $('.gauge' + prefix);
             const digit = gauge.data('digit');
             gauge.addClass('load ');
             setTimeout(() => {
-                gauge.find('.current-digit' + prefix).text(digit).trigger('count');
+                gauge.find('.current-digit' + prefix).text(digit +unit).trigger('count');
             }, 1000)
         }, 500); // not imp
     }
