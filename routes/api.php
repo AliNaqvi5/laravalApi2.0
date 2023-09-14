@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\alarmsController;
+use App\Http\Controllers\API\alarmsController;
 use App\Http\Controllers\API\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,14 +33,13 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::resource('data', DataController::class);
 
     Route::controller(DataController::class)->group(function(){
-    Route::post('store', 'store');
-    Route::post('showRecent', 'showRecent');
-    Route::post('show/{id}', 'show');
-//    Route::post('login', 'login');
-});
+    Route::post('data-store', 'store');
+    Route::post('data-showRecent', 'showRecent');
+    Route::post('data-show/{id}', 'show');
+    });
 
     Route::controller(alarmsController::class)->group(function(){
-    Route::post('alarmstore', 'store');
-//    Route::post('login', 'login');
-});
+    Route::post('alarm-store', 'store');
+    Route::post('alarm-show', 'show');
+    });
 });

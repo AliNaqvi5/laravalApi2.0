@@ -12,12 +12,13 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <link href="{{ asset('style.css') }}" rel="stylesheet">
     <link href="{{ asset('humidityGuage.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('index.js') }}"></script>
+    <script src="{{ asset('axios.js') }}"></script>
     <script src="{{ asset('humidityGuage.js') }}"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

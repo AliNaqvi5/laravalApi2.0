@@ -1,6 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="alarmModalTitle">Alarm</h5>
+{{--                    <button type="button" class="close bg-danger" data-dismiss="modal" aria-label="Close">--}}
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="alarmModalBody" style="color:red">
+
+                </div>
+                <div class="modal-footer">
+{{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                    <button type="button" class="btn btn-danger" id="alarmModalBtn" onclick="Acknowledge()">Acknowledge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+{{--            <img src="..." class="rounded mr-2" >--}}
+            <strong class="mr-auto">Bootstrap</strong>
+            <small class="text-muted">just now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            See? Just like this.
+        </div>
+    </div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -35,14 +68,13 @@
                         <div class="card-header">{{ __('Solar Intensity') }}</div>
                         <div class="card-body">
                             {{--                            @if($lux->value <= 0 )--}}
-                            @if(date_sunrise(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) > (explode(" ",$lux->created_at)[1]) && date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) < (explode(" ",$lux->created_at)[1]))
-                                <img src="{{ asset('img/Night.png') }}" style=" width: 54%;">
-                                <h3 class="headingSensorGuage" style="display: inline;"> {{$lux->value.' lux' }}<br>{{("Night")}}</h3>
-                            @elseif(date_sunrise(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) == (explode(" ",$lux->created_at)[1]) || date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) == (explode(" ",$lux->created_at)[1]))
-                                <img src="{{ asset('img/rise.png') }}" style=" width: 54%;">
-                                <h3 class="headingSensorGuage" style="display: inline;">{{$lux->value.' lux ' }}<br>{{"(Sun at horizon)"}}</h3>
-                            @else
-
+{{--                            {{ date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) }}--}}
+                            @php $createdAtPST = date('Y-m-d H:i:s', strtotime(($lux->created_at). ' +5 hours'));
+                                $sunset = date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) ; $sunrise =date_sunrise(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) ;
+                                $createdAtPST = explode(" ",$createdAtPST)[1];
+                            @endphp
+{{--                            {{explode(" ",$createdAtPST)[1]}}--}}
+                            @if($sunrise < $createdAtPST && $sunset > $createdAtPST)
                                 @if($lux->value <= 1000 && $lux->value >= 500)
                                     <img src="{{ asset('img/cloudy.png') }}" style=" width: 54%;">
                                     <h3 class="headingSensorGuage" style="display: inline;">{{$lux->value.' lux ' }} <br>{{"(Overcast DayLight)"}}</h3>
@@ -56,6 +88,13 @@
                                     <img src="{{ asset('img/Sun.jpg') }}" style=" width: 54%;">
                                     <h3 class="headingSensorGuage" style="display: inline;">{{$lux->value.' lux' }}</h3>
                                 @endif
+                            @elseif($sunrise == $createdAtPST || $sunset == $createdAtPST)
+                                <img src="{{ asset('img/rise.png') }}" style=" width: 54%;">
+                                <h3 class="headingSensorGuage" style="display: inline;">{{$lux->value.' lux ' }}<br>{{"(Sun at horizon)"}}</h3>
+                            @elseif($sunrise > $createdAtPST || $sunset > $createdAtPST)
+                                <img src="{{ asset('img/Night.png') }}" style=" width: 54%;">
+                                <h3 class="headingSensorGuage" style="display: inline;"> {{$lux->value.' lux' }}<br>{{("Night")}}</h3>
+
                             @endif
                         </div>
                     </div>

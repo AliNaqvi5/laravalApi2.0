@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('sensor_id')->unsigned();
             $table->string('title');
+            $table->string('acknowledge')->default("no");
             $table->timestamps();
         });
     }

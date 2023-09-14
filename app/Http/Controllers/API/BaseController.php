@@ -37,7 +37,6 @@ class BaseController extends Controller
     {
     	$response = [
             'success' => false,
-            'message' => $error,
         ];
 
 
@@ -46,6 +45,6 @@ class BaseController extends Controller
         }
 
 
-        return response()->json($response, $code);
+        return response()->json($response);
     }
 }

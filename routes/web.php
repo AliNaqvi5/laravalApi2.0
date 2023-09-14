@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\alarmsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\dashboardController::class, 'index'])->name('dashboard');
+
+Route::controller(alarmsController::class)->group(function(){
+    Route::get('alarm-show', 'show');
+    Route::get('alarm-ack/{id}', 'ack');
+});
