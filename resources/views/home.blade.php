@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @php $createdAtPST = date('Y-m-d H:i:s', strtotime(($lux->created_at). ' +5 hours'));
+                                $sunset = date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) ; $sunrise =date_sunrise(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) ;
+                                $createdAtPST = explode(" ",$createdAtPST)[1];
+    @endphp
+
     <div class="modal fade" id="alarmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -40,6 +46,61 @@
             <div class="row">
                 <div class="sensor col-md-8">
                     <div class="card" >
+                        <div class="card-header" style="text-align: left;">{{ __('Farm Details') }}</div>
+                        <div class="card-body">
+                                        <table class="table table-striped">
+                                            <tbody >
+                                            <tr>
+                                                <td><b>Farm Name</b></td>
+                                                <td>{{ $farms->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Farm Id</b></td>
+                                                <td>FARM0123_{{ $farms->id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Farm Location</b></td>
+                                                <td>{{ $farms->location }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Farm Area</b></td>
+                                                <td>{{ $farms->area }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Last Data Read</b></td>
+                                                <td>{{ $createdAtPST }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Sunrise Time</b></td>
+                                                <td>{{ $sunrise }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Sunset Time</b></td>
+                                                <td>{{ $sunset }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="sensor col-md-4">
+                <div class="card" >
+                    <div class="card-header">{{ __('Water Tank Level and Pump Controls') }}</div>
+                    <div class="card-body" style="">
+                        <label class="switch">
+                            <input type="checkbox" {{ $controls["pump"]->value=="on"? "checked" : ""  }}>
+                            <span class="slider round"></span>
+                        </label>
+                        <p style="display: inline;"> Water Pump Switch</p>
+                        <p id="waterLevel" style="visibility: hidden;">{{ $waterLevel->value }}</p>
+                        <div id="fluid-meter"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sensor col-md-8">
+                    <div class="card" >
                         <div class="card-header">{{ __('Temperature Sensor') }}</div>
                         <div class="card-body">
                             <div class="gaugeTemp" data-digit={{ round($temperature->value) }}>
@@ -69,10 +130,6 @@
                         <div class="card-body">
                             {{--                            @if($lux->value <= 0 )--}}
 {{--                            {{ date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) }}--}}
-                            @php $createdAtPST = date('Y-m-d H:i:s', strtotime(($lux->created_at). ' +5 hours'));
-                                $sunset = date_sunset(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) ; $sunrise =date_sunrise(time(),SUNFUNCS_RET_STRING,24.8,67.0011,90,5) ;
-                                $createdAtPST = explode(" ",$createdAtPST)[1];
-                            @endphp
 {{--                            {{explode(" ",$createdAtPST)[1]}}--}}
                             @if($sunrise < $createdAtPST && $sunset > $createdAtPST)
                                 @if($lux->value <= 1000 && $lux->value >= 500)
@@ -138,7 +195,42 @@
                 </div>
 
             </div>
+<script>
+    var fm = new FluidMeter();
+    fm.init({
+        targetContainer: document.getElementById("fluid-meter"),
+        fillPercentage: 15,
+        options: {
+            fontSize: "50px",
+            fontFamily: "Arial",
+            fontFillStyle: "#ffffff",
+            drawShadow: true,
+            drawText: true,
+            drawPercentageSign: true,
+            drawBubbles: false,
+            size: 250,
+            borderWidth: 5,
+            backgroundColor: "#ffffff",
+            foregroundColor: "#016e9b",
+            foregroundFluidLayer: {
+                fillStyle: "#15b0f5",
+                angularSpeed: 70,
+                maxAmplitude: 12,
+                frequency: 30,
+                horizontalSpeed: -50
+            },
+            backgroundFluidLayer: {
+                fillStyle: "#0489c0",
+                angularSpeed: 70,
+                maxAmplitude: 9,
+                frequency: 30,
+                horizontalSpeed: 50
+            }
+        }
+    });
+    fm.setPercentage($("#waterLevel").html());
 
+</script>
 
         </div>
     </div>

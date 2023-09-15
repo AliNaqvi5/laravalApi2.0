@@ -50,9 +50,15 @@ async function getAlarms() {
         console.error('Error:', error);
     }
 }
-function triggerAlarm(res)
+async function waterPumpControl(value)
 {
 
+    try {
+        await axios.post("control-waterPump",{"value":value}) ;
+        // console.log('Response:', response.data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 async function Acknowledge(id)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\alarmsController;
+use App\Http\Controllers\API\controlsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,10 @@ Route::get('/dashboard', [App\Http\Controllers\dashboardController::class, 'inde
 Route::controller(alarmsController::class)->group(function(){
     Route::get('alarm-show', 'show');
     Route::get('alarm-ack/{id}', 'ack');
+});
+
+
+Route::controller(controlsController::class)->group(function(){
+    Route::post('control-waterPump', 'waterPump');
+//    Route::post('alarm-show', 'show');
 });

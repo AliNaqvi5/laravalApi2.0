@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\alarmsController;
+use App\Http\Controllers\API\controlsController;
 use App\Http\Controllers\API\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,5 +42,10 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::controller(alarmsController::class)->group(function(){
     Route::post('alarm-store', 'store');
     Route::post('alarm-show', 'show');
+    });
+    Route::controller(controlsController::class)->group(function(){
+        Route::post('control-waterPump', 'waterPump');
+        Route::post('control-waterPump', 'index');
+//    Route::post('alarm-show', 'show');
     });
 });

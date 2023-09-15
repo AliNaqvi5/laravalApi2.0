@@ -18,6 +18,7 @@ class sensorsSeeder extends Seeder
         sensors::create(["id"=> 3, "name"=> "LUX Sensor"]);
         sensors::create(["id"=> 4, "name"=> "Rain Sensor"]);
         sensors::create(["id"=> 5, "name"=> "Soil Moisture Sensor"]);
+        sensors::create(["id"=> 6, "name"=> "Water Level Sensor"]);
         //
     }
 }
